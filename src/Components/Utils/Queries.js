@@ -410,7 +410,7 @@ export function fetchTotalPeople() {
 //QUERY TO FETCH TOTAL INSTITUTIONS
 export function fetchTotalInstitutions() {
   const session = this.driver.session();
-  const query = `MATCH (n:Institution) RETURN labels(n), count(*) AS Count`
+  const query = `MATCH (n:Institution) RETURN count(n) AS Count`
   session.run(query).then((results) => {
     const totalInstitutions = results.records.map((record) => record.get('Count'));
     this.setState ({ totalInstitutions })
