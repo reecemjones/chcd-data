@@ -18,6 +18,7 @@ class GeneralView extends Component {
     super(props);
     this.state = {
       totalPeople: '',
+      totalInstitutions: ''
     }
 
     // INITIATE NEO4J INSTANCE
@@ -28,11 +29,13 @@ class GeneralView extends Component {
     );
     // BIND UTILITY FUNCTIONS TO THIS CONTEXT
     this.fetchTotalPeople = query.fetchTotalPeople.bind(this);
+    this.fetchTotalInstitutions = query.fetchTotalInstitutions.bind(this);
   }
 
 //RUN ON COMPONENT MOUNT //////////////////////////////////////////////////////
   componentDidMount() {
     this.fetchTotalPeople();
+    this.fetchTotalInstitutions();
   }
 
 //RENDER //////////////////////////////////////////////////////////////////////
@@ -43,6 +46,7 @@ class GeneralView extends Component {
           <TotalCount type="Nodes" queryResult={8832} /* PUT YOUR CUSTOM QUERY HERE */ />
           <TotalCount type="Relationships" queryResult={98} /* PUT YOUR CUSTOM QUERY HERE */ />
           <TotalCount type="People" queryResult={this.state.totalPeople} />
+          <TotalCount type="Institutions" queryResult={this.state.totalInstitutions} />
         </div>
       </>
     )
