@@ -6,7 +6,6 @@ import React, { Component } from 'react'
 import neo4j from "neo4j-driver/lib/browser/neo4j-web";
 // HELPER FILES
 import credentials from "../../../credentials.json";
-import * as helper from "../../Utils/Helpers.js";
 import * as query from "../../Utils/Queries.js";
 
 
@@ -18,6 +17,7 @@ class GeneralView extends Component {
     super(props);
     this.state = {
       totalPeople: '',
+      totalEvents: ''
     }
 
     // INITIATE NEO4J INSTANCE
@@ -28,11 +28,13 @@ class GeneralView extends Component {
     );
     // BIND UTILITY FUNCTIONS TO THIS CONTEXT
     this.fetchTotalPeople = query.fetchTotalPeople.bind(this);
+    this.fetchTotalEvents = query.fetchTotalEvents.bind(this);
   }
 
 //RUN ON COMPONENT MOUNT //////////////////////////////////////////////////////
   componentDidMount() {
     this.fetchTotalPeople();
+    this.fetchTotalEvents();
   }
 
 //RENDER //////////////////////////////////////////////////////////////////////
@@ -43,6 +45,7 @@ class GeneralView extends Component {
           <TotalCount type="Nodes" queryResult={8832} /* PUT YOUR CUSTOM QUERY HERE */ />
           <TotalCount type="Relationships" queryResult={98} /* PUT YOUR CUSTOM QUERY HERE */ />
           <TotalCount type="People" queryResult={this.state.totalPeople} />
+          <TotalCount type="Events" queryResult={this.state.totalEvents} />
         </div>
       </>
     )
