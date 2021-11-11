@@ -407,6 +407,16 @@ export function fetchTotalPeople() {
     session.close()})
 };
 
+//QUERY TO FETCH TOTAL INSTITUTIONS
+export function fetchTotalInstitutions() {
+  const session = this.driver.session();
+  const query = `MATCH (n:Institution) RETURN count(n) AS Count`
+  session.run(query).then((results) => {
+    const totalInstitutions = results.records.map((record) => record.get('Count'));
+    this.setState ({ totalInstitutions })
+    session.close()})
+};
+
 //QUERY TO FETCH TOTAL EVENTS
 export function fetchTotalEvents() {
   const session = this.driver.session();
@@ -415,4 +425,4 @@ export function fetchTotalEvents() {
     const totalEvents = results.records.map((record) => record.get('Count'));
     this.setState ({ totalEvents })
     session.close()})
-};
+  };
