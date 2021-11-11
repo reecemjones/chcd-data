@@ -1,15 +1,13 @@
 // IMPORTS ////////////////////////////////////////////////////////////////////
-import TotalCount from './TotalCount';
+import TotalCount from "./TotalCount";
 
 // MAIN DEPENDENCIES
-import React, { Component } from 'react'
+import React, { Component } from "react";
 import neo4j from "neo4j-driver/lib/browser/neo4j-web";
 // HELPER FILES
 import credentials from "../../../credentials.json";
 import * as helper from "../../Utils/Helpers.js";
 import * as query from "../../Utils/Queries.js";
-
-
 
 class GeneralView extends Component {
 
@@ -38,7 +36,7 @@ class GeneralView extends Component {
     this.fetchTotalInstitutions();
   }
 
-//RENDER //////////////////////////////////////////////////////////////////////
+//RENDER ///////////////////////////////////////////////////////////////////////
   render() {
     return ( 
       <>
@@ -52,6 +50,19 @@ class GeneralView extends Component {
     )
   }
 
+    //RENDER ///////////////////////////////////////////////////////////////////////
+    render() {
+        return (
+            <>
+                <div className="d-flex">
+                    <TotalCount type="Nodes" queryResult={43214} /* PUT YOUR CUSTOM QUERY HERE */ />
+                    <TotalCount type="Relationships" queryResult={98} /* PUT YOUR CUSTOM QUERY HERE */ />
+                    <TotalCount type="People" queryResult={this.state.totalPeople} />
+                    <TotalCount type="Institutions" queryResult={this.state.totalInstitutions} />
+                </div>
+            </>
+        );
+    }
 }
 
-export default GeneralView
+export default GeneralView;
