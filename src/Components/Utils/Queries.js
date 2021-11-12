@@ -420,10 +420,10 @@ export function fetchTotalInstitutions() {
 //Total Relationships
 export function fetchTotalRelationship() {
   const session = this.driver.session();
-  const query = `MATCH p=()-->() RETURN count(p) AS Count`
+  const query = `MATCH (n)-[r]->() RETURN COUNT(r) AS Count`
   session.run(query).then((results) => {
-    const totalRelationship = results.records.map((record) => record.get('Count'));
-    this.setState ({ totalRelationship })
+    const totalRelationships = results.records.map((record) => record.get('Count'));
+    this.setState ({ totalRelationships })
     session.close()})
 };
 
