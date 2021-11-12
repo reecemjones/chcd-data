@@ -1,7 +1,5 @@
 // IMPORTS ////////////////////////////////////////////////////////////////////
 import TotalCount from "./TotalCount";
-import TotalNode from "./TotalNode";
-import TotalRelationship from "./TotalRelationship";
 
 // MAIN DEPENDENCIES
 import React, { Component } from "react";
