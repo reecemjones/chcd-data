@@ -436,3 +436,12 @@ export function fetchTotalEvents() {
     this.setState ({ totalEvents })
     session.close()})
   };
+
+  export function fetchTotalNodes() {
+    const session = this.driver.session();
+    const query = `MATCH (n) RETURN count(n) AS Count`
+    session.run(query).then((results) => {
+      const totalNodes = results.records.map((record) => record.get('Count'));
+      this.setState ({ totalNodes })
+      session.close()})
+    };

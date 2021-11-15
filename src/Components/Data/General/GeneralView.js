@@ -16,7 +16,8 @@ class GeneralView extends Component {
             totalPeople: "",
             totalRelationships: "",
             totalInstitutions: "",
-            totalEvents: ""
+            totalEvents: "",
+            totalNodes: ""
         };
 
         // INITIATE NEO4J INSTANCE
@@ -28,6 +29,7 @@ class GeneralView extends Component {
         this.fetchTotalRelationship = query.fetchTotalRelationship.bind(this);
         this.fetchTotalInstitutions = query.fetchTotalInstitutions.bind(this);
         this.fetchTotalEvents = query.fetchTotalEvents.bind(this);
+        this.fetchTotalNodes = query.fetchTotalNodes.bind(this);
     }
 
     //RUN ON COMPONENT MOUNT //////////////////////////////////////////////////////
@@ -36,6 +38,7 @@ class GeneralView extends Component {
         this.fetchTotalRelationship();
         this.fetchTotalEvents();
         this.fetchTotalInstitutions();
+        this.fetchTotalNodes();
     }
 
     //RENDER ///////////////////////////////////////////////////////////////////////
@@ -43,7 +46,7 @@ class GeneralView extends Component {
         return (
             <>
                 <div className="d-flex">
-                    <TotalCount type="Nodes" queryResult={8832} /* PUT YOUR CUSTOM QUERY HERE */ />
+                    <TotalCount type="Nodes" queryResult={this.state.totalNodes} />
                     <TotalCount type="Relationships" queryResult={this.state.totalRelationships} />
                     <TotalCount type="People" queryResult={this.state.totalPeople} />
                     <TotalCount type="Institutions" queryResult={this.state.totalInstitutions} />
