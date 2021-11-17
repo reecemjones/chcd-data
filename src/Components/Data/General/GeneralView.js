@@ -1,5 +1,7 @@
 // IMPORTS ////////////////////////////////////////////////////////////////////
 import TotalCount from "./TotalCount";
+import GenderPieChart from "./GenderPieChart";
+import { Row } from 'react-bootstrap';
 
 // MAIN DEPENDENCIES
 import React, { Component } from "react";
@@ -45,13 +47,20 @@ class GeneralView extends Component {
     render() {
         return (
             <>
-                <div className="d-flex">
-                    <TotalCount type="Nodes" queryResult={this.state.totalNodes} />
-                    <TotalCount type="Relationships" queryResult={this.state.totalRelationships} />
-                    <TotalCount type="People" queryResult={this.state.totalPeople} />
-                    <TotalCount type="Institutions" queryResult={this.state.totalInstitutions} />
-                    <TotalCount type="Events" queryResult={this.state.totalEvents} />
-                </div>
+                <Row>
+                    <div className="d-flex">
+                        <TotalCount type="Nodes" queryResult={this.state.totalNodes} />
+                        <TotalCount type="Relationships" queryResult={this.state.totalRelationships} />
+                        <TotalCount type="People" queryResult={this.state.totalPeople} />
+                        <TotalCount type="Institutions" queryResult={this.state.totalInstitutions} />
+                        <TotalCount type="Events" queryResult={this.state.totalEvents} />
+                    </div>
+                </Row>
+                <Row className="mt-4">
+                    <div>
+                        <GenderPieChart />
+                    </div>
+                </Row>
             </>
         );
     }
