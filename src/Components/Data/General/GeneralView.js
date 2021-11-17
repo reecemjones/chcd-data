@@ -19,7 +19,8 @@ class GeneralView extends Component {
             totalRelationships: "",
             totalInstitutions: "",
             totalEvents: "",
-            totalNodes: ""
+            totalNodes: "",
+            genders: ""
         };
 
         // INITIATE NEO4J INSTANCE
@@ -32,6 +33,7 @@ class GeneralView extends Component {
         this.fetchTotalInstitutions = query.fetchTotalInstitutions.bind(this);
         this.fetchTotalEvents = query.fetchTotalEvents.bind(this);
         this.fetchTotalNodes = query.fetchTotalNodes.bind(this);
+        this.fetchGenders = query.fetchGenders.bind(this);
     }
 
     //RUN ON COMPONENT MOUNT //////////////////////////////////////////////////////
@@ -41,6 +43,7 @@ class GeneralView extends Component {
         this.fetchTotalEvents();
         this.fetchTotalInstitutions();
         this.fetchTotalNodes();
+        this.fetchGenders();
     }
 
     //RENDER ///////////////////////////////////////////////////////////////////////
@@ -58,7 +61,8 @@ class GeneralView extends Component {
                 </Row>
                 <Row className="mt-4">
                     <div>
-                        <GenderPieChart />
+                        {console.log(this.state.genders)}
+                        <GenderPieChart queryResult={this.state.genders} />
                     </div>
                 </Row>
             </>
