@@ -12,7 +12,7 @@ function TotalCount(props) {
 
   // RETURNS PLACEHOLDER
   return ( 
-    <Card style={{ width: '100%' }}>
+    <Card style={{ maxWidth: '220px', width: '100%', border: 'none' }}>
       <Card.Body>
         <Card.Text className="text-center text-uppercase mb-0" style={{fontSize: '.8rem'}}>Total {props.type}</Card.Text>
         <Card.Title className="text-center fw-bolder fs-3">
