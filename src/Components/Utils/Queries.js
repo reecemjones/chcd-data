@@ -446,6 +446,16 @@ export function fetchTotalEvents() {
       session.close()})
   };
 
+  //QUERY TO FETCH TOTAL CORPORATE ENTITIES
+  export function fetchTotalCorporateEntities() {
+    const session = this.driver.session();
+    const query = `MATCH (n:CorporateEntity) RETURN count(n) AS Count`
+    session.run(query).then((results) => {
+      const totalCorporateEntities = results.records.map((record) => record.get('Count'));
+      this.setState ({ totalCorporateEntities })
+      session.close()})
+  };
+
   //QUERY TO GET GENDERS OF ALL PEOPLE
   export function fetchGenders() {
     const session = this.driver.session();

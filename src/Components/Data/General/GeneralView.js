@@ -20,6 +20,7 @@ class GeneralView extends Component {
             totalInstitutions: "",
             totalEvents: "",
             totalNodes: "",
+            totalCorporateEntities: "",
             genders: ""
         };
 
@@ -34,6 +35,7 @@ class GeneralView extends Component {
         this.fetchTotalEvents = query.fetchTotalEvents.bind(this);
         this.fetchTotalNodes = query.fetchTotalNodes.bind(this);
         this.fetchGenders = query.fetchGenders.bind(this);
+        this.fetchTotalCorporateEntities = query.fetchTotalCorporateEntities.bind(this);
     }
 
     //RUN ON COMPONENT MOUNT //////////////////////////////////////////////////////
@@ -44,26 +46,28 @@ class GeneralView extends Component {
         this.fetchTotalInstitutions();
         this.fetchTotalNodes();
         this.fetchGenders();
+        this.fetchTotalCorporateEntities();
     }
 
     //RENDER ///////////////////////////////////////////////////////////////////////
     render() {
         return (
             <>
-                <Row>
-                    <div className="d-flex">
+                <Row className="bg-white">
+                    <div className="d-flex flex-wrap flex-row justify-content-center">
                         <TotalCount type="Nodes" queryResult={this.state.totalNodes} />
                         <TotalCount type="Relationships" queryResult={this.state.totalRelationships} />
                         <TotalCount type="People" queryResult={this.state.totalPeople} />
                         <TotalCount type="Institutions" queryResult={this.state.totalInstitutions} />
                         <TotalCount type="Events" queryResult={this.state.totalEvents} />
+                        <TotalCount type="Corporate Entities" queryResult={this.state.totalCorporateEntities} />
                     </div>
                 </Row>
                 <Row className="mt-4">
-                    <div>
+                    {/* <div> */}
                         {console.log(this.state.genders)}
                         <GenderPieChart queryResult={this.state.genders} />
-                    </div>
+                    {/* </div> */}
                 </Row>
             </>
         );
