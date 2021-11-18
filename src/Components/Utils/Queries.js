@@ -444,4 +444,13 @@ export function fetchTotalEvents() {
       const totalNodes = results.records.map((record) => record.get('Count'));
       this.setState ({ totalNodes })
       session.close()})
-    };
+  };
+
+  export function fetchTotalCorporateEntities() {
+    const session = this.driver.session();
+    const query = `MATCH (n:CorporateEntity) RETURN count(n) AS Count`
+    session.run(query).then((results) => {
+      const totalCorporateEntities = results.records.map((record) => record.get('Count'));
+      this.setState ({ totalCorporateEntities })
+      session.close()})
+  };

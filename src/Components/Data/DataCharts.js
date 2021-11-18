@@ -13,7 +13,7 @@ function DataCharts(props) {
 
   // RETURNS PLACEHOLDER
   return (
-    <div className="list_container bg-white">
+    <div className="list_container bg-light">
       <div className="list_float">
         <Row><Col>
           <div className="pt-4">
