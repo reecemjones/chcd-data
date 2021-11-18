@@ -54,7 +54,7 @@ class GeneralView extends Component {
                     <TotalCount type="People" queryResult={this.state.totalPeople} />
                     <TotalCount type="Institutions" queryResult={this.state.totalInstitutions} />
                     <TotalCount type="Events" queryResult={this.state.totalEvents} />
-                    <TotalCount type="Corporate Entites" queryResult={this.state.totalCorporateEntities} />
+                    <TotalCount type="Corporate Entities" queryResult={this.state.totalCorporateEntities} />
                 </div>
             </>
         );
