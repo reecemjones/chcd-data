@@ -1,6 +1,6 @@
 // IMPORTS ////////////////////////////////////////////////////////////////////
 import TotalCount from "./TotalCount";
-import GenderPieChart from "./GenderPieChart";
+import PieChart from "./PieChart";
 import { Row } from 'react-bootstrap';
 
 // MAIN DEPENDENCIES
@@ -9,6 +9,7 @@ import neo4j from "neo4j-driver/lib/browser/neo4j-web";
 // HELPER FILES
 import credentials from "../../../credentials.json";
 import * as query from "../../Utils/Queries.js";
+import * as helper from "../../Utils/Helpers.js";
 
 class GeneralView extends Component {
     //STATE, PROPS, DRIVER INFO, & BINDS
@@ -34,8 +35,9 @@ class GeneralView extends Component {
         this.fetchTotalInstitutions = query.fetchTotalInstitutions.bind(this);
         this.fetchTotalEvents = query.fetchTotalEvents.bind(this);
         this.fetchTotalNodes = query.fetchTotalNodes.bind(this);
-        this.fetchGenders = query.fetchGenders.bind(this);
         this.fetchTotalCorporateEntities = query.fetchTotalCorporateEntities.bind(this);
+        this.fetchGenders = query.fetchGenders.bind(this);
+        this.renameProperty = helper.renameProperty.bind(this);
     }
 
     //RUN ON COMPONENT MOUNT //////////////////////////////////////////////////////
@@ -45,8 +47,16 @@ class GeneralView extends Component {
         this.fetchTotalEvents();
         this.fetchTotalInstitutions();
         this.fetchTotalNodes();
-        this.fetchGenders();
         this.fetchTotalCorporateEntities();
+        this.fetchGenders();
+    }
+
+    sanitizeList() {
+        // Loop through each list object and sanitize for d3 processing (d3 PieChart requires 'key' and 'value' object pairs)
+        for (let i = 0; i < this.state.genders.length; i++) {
+            this.renameProperty(this.state.genders[i], 'gender', 'key')
+            this.renameProperty(this.state.genders[i], 'count', 'value')
+        } 
     }
 
     //RENDER ///////////////////////////////////////////////////////////////////////
@@ -64,10 +74,10 @@ class GeneralView extends Component {
                     </div>
                 </Row>
                 <Row className="mt-4">
-                    {/* <div> */}
-                        {console.log(this.state.genders)}
-                        <GenderPieChart queryResult={this.state.genders} />
-                    {/* </div> */}
+                    { this.state.genders && (
+                        this.sanitizeList(),
+                        <PieChart title="Gender By Total Number of People" queryResult={this.state.genders} />
+                    )}
                 </Row>
             </>
         );
