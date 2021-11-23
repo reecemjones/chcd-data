@@ -329,3 +329,9 @@ export function linkCheck(props, node) {
   )}
   else { return null }
 };
+
+// Renames property (key) name of object
+export function renameProperty(obj, oldName, newName) {
+  obj[newName] = obj[oldName];
+  delete obj[oldName];
+}

@@ -1,0 +1,10 @@
+.shadow-filter {
+    -webkit-filter: drop-shadow( 0px 3px 3px rgba(0,0,0,.2) );
+    filter: drop-shadow( 0px 3px 3px rgba(0,0,0,.2) );
+}
+
+.section:hover {
+    cursor: pointer;
+    transition: opacity .3s;
+    opacity: .9;
+}

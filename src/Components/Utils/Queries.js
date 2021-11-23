@@ -328,7 +328,7 @@ export function fetchMapIndexes() {
     const resultIndex = results.records.map((record) => record.get('List'));
     const addAll = [{category: "All", subcategory:["All"]}];
     const test = addAll.concat(resultIndex);
-    const instCatsIndex = test.map( (i) =>[i.category, i.subcategory]);
+    const instCatsIndex = test.map( (i) =>[i.category, i.subcategory]);    
     this.setState ({ instCatsIndex });
     session.close()});
 
@@ -435,7 +435,7 @@ export function fetchTotalEvents() {
     const totalEvents = results.records.map((record) => record.get('Count'));
     this.setState ({ totalEvents })
     session.close()})
-  };
+};
 
   export function fetchTotalNodes() {
     const session = this.driver.session();
@@ -446,11 +446,26 @@ export function fetchTotalEvents() {
       session.close()})
   };
 
+  //QUERY TO FETCH TOTAL CORPORATE ENTITIES
   export function fetchTotalCorporateEntities() {
     const session = this.driver.session();
     const query = `MATCH (n:CorporateEntity) RETURN count(n) AS Count`
     session.run(query).then((results) => {
       const totalCorporateEntities = results.records.map((record) => record.get('Count'));
       this.setState ({ totalCorporateEntities })
+      session.close()})
+  };
+
+  //QUERY TO GET GENDERS OF ALL PEOPLE
+  export function fetchGenders() {
+    const session = this.driver.session();
+    const query = `MATCH (n:Person)
+      WITH n.gender AS gender, count(*) AS count
+      WHERE count > 1
+      RETURN DISTINCT {gender: gender, count: count} AS List
+      `
+    session.run(query).then((results) => {
+      const genders = results.records.map((record) => record.get('List', 'gender'));
+      this.setState ({ genders })
       session.close()})
   };
