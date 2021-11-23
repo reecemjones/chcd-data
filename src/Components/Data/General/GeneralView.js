@@ -22,7 +22,8 @@ class GeneralView extends Component {
             totalEvents: "",
             totalNodes: "",
             totalCorporateEntities: "",
-            genders: ""
+            genders: "",
+            christianTradition: ""
         };
 
         // INITIATE NEO4J INSTANCE
@@ -37,6 +38,7 @@ class GeneralView extends Component {
         this.fetchTotalNodes = query.fetchTotalNodes.bind(this);
         this.fetchTotalCorporateEntities = query.fetchTotalCorporateEntities.bind(this);
         this.fetchGenders = query.fetchGenders.bind(this);
+        this.fetchChristianTradition = query.fetchChristianTradition.bind(this);
         this.renameProperty = helper.renameProperty.bind(this);
     }
 
@@ -49,14 +51,16 @@ class GeneralView extends Component {
         this.fetchTotalNodes();
         this.fetchTotalCorporateEntities();
         this.fetchGenders();
+        this.fetchChristianTradition();
     }
 
-    sanitizeList() {
+    sanitizeList(list, property1,) {
         // Loop through each list object and sanitize for d3 processing (d3 PieChart requires 'key' and 'value' object pairs)
-        for (let i = 0; i < this.state.genders.length; i++) {
-            this.renameProperty(this.state.genders[i], 'gender', 'key')
-            this.renameProperty(this.state.genders[i], 'count', 'value')
+        for (let i = 0; i < list.length; i++) {
+            this.renameProperty(list[i], property1, 'key')
+            this.renameProperty(list[i], 'count', 'value')
         } 
+        console.log(this.state.christianTradition)
     }
 
     //RENDER ///////////////////////////////////////////////////////////////////////
@@ -75,8 +79,12 @@ class GeneralView extends Component {
                 </Row>
                 <Row className="mt-4">
                     { this.state.genders && (
-                        this.sanitizeList(),
+                        this.sanitizeList(this.state.genders, 'gender'),
                         <PieChart title="Gender By Total Number of People" queryResult={this.state.genders} />
+                    )}
+                    { this.state.christianTradition && (
+                        this.sanitizeList(this.state.christianTradition, 'christian_tradition'),
+                        <PieChart title="Christian Traditions by Nodes" queryResult={this.state.christianTradition} />
                     )}
                 </Row>
             </>

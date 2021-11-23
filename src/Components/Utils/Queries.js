@@ -469,3 +469,20 @@ export function fetchTotalEvents() {
       this.setState ({ genders })
       session.close()})
   };
+
+  //QUERY TO GET CHRISTIAN TRADITIONS OF ALL PEOPLE
+  export function fetchChristianTradition() {
+    const session = this.driver.session();
+    const query = `
+      MATCH (n) 
+      WITH n.christian_tradition AS christian_tradition, count(n) AS count 
+      WHERE n.christian_tradition IS NOT NULL
+      RETURN DISTINCT {christian_tradition: christian_tradition, count: count} AS List
+      `
+    session.run(query).then((results) => {
+      const christianTradition = results.records.map((record) => record.get('List', 'christian_tradition'));
+      this.setState ({ christianTradition })
+      session.close()})
+  };
+
+  

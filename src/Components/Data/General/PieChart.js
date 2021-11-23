@@ -66,7 +66,8 @@ function PieChart(props) {
       .enter()
       .append("text")
       .transition()
-      .duration(200)
+      .delay(1000)
+      .duration(0)
       .attr("transform", function (d) {
           return "translate(" + arc.centroid(d) + ")";
       })
@@ -75,9 +76,10 @@ function PieChart(props) {
       .text(function(d){
           return d.data.value;
       })
+      .attr('class', 'shadow-filter stroke-filter')
       .style("fill", "#fff")
       .style("font-weight", "bold")
-      .style("font-size", "14px")
+      .style("font-size", "18px")
 
     // add legend
     const legendRectSize=20;
@@ -91,7 +93,7 @@ function PieChart(props) {
       .attr("class", "legend" )
       .attr("transform", function(d,i) {
         //Just a calculation for x and y position
-        return 'translate(-35,' + ((i*legendHeight)-40) + ')';
+        return 'translate(-50,' + ((i*legendHeight)-40) + ')';
       })
       .style("background-color", "gray")
 
