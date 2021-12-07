@@ -469,3 +469,17 @@ export function fetchTotalEvents() {
       this.setState ({ genders })
       session.close()})
   };
+
+  //Query to get Nationality of all people
+  export function fetchNationality() {
+    const session = this.driver.session();
+    const query = `PROFILE MATCH (n:Person) 
+    WITH n.nationality AS nationality, count(n) AS count
+    WHERE n.nationality IS NOT NULL
+    RETURN DISTINCT {nationality: nationality, count: count} AS List
+    `
+    session.run(query).then((results) => {
+      const nationality = results.records.map((record) => record.get('List', 'nationality'));
+      this.setState ({ nationality })
+      session.close()})
+  };

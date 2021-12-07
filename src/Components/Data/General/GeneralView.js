@@ -2,6 +2,7 @@
 import TotalCount from "./TotalCount";
 import PieChart from "./PieChart";
 import { Row } from 'react-bootstrap';
+import BarGraph from "./NationalityChart";
 
 // MAIN DEPENDENCIES
 import React, { Component } from "react";
@@ -22,7 +23,8 @@ class GeneralView extends Component {
             totalEvents: "",
             totalNodes: "",
             totalCorporateEntities: "",
-            genders: ""
+            genders: "",
+            nationality:""
         };
 
         // INITIATE NEO4J INSTANCE
@@ -38,6 +40,7 @@ class GeneralView extends Component {
         this.fetchTotalCorporateEntities = query.fetchTotalCorporateEntities.bind(this);
         this.fetchGenders = query.fetchGenders.bind(this);
         this.renameProperty = helper.renameProperty.bind(this);
+        this.fetchNationality = query.fetchNationality.bind(this);
     }
 
     //RUN ON COMPONENT MOUNT //////////////////////////////////////////////////////
@@ -49,6 +52,7 @@ class GeneralView extends Component {
         this.fetchTotalNodes();
         this.fetchTotalCorporateEntities();
         this.fetchGenders();
+        this.fetchNationality();
     }
 
     sanitizeList() {
@@ -56,6 +60,13 @@ class GeneralView extends Component {
         for (let i = 0; i < this.state.genders.length; i++) {
             this.renameProperty(this.state.genders[i], 'gender', 'key')
             this.renameProperty(this.state.genders[i], 'count', 'value')
+        } 
+    }
+    sanitizeGraph() {
+        // Loop through each list object and sanitize for d3 processing (d3 PieChart requires 'key' and 'value' object pairs)
+        for (let i = 0; i < this.state.nationality.length; i++) {
+            this.renameProperty(this.state.nationality[i], 'nationality', 'key')
+            this.renameProperty(this.state.nationality[i], 'count', 'value')
         } 
     }
 
@@ -77,6 +88,12 @@ class GeneralView extends Component {
                     { this.state.genders && (
                         this.sanitizeList(),
                         <PieChart title="Gender By Total Number of People" queryResult={this.state.genders} />
+                    )}
+                </Row>
+                <Row className="mt-4">
+                    { this.state.nationality && (
+                        this.sanitizeGraph(),
+                        <BarGraph title=" Nationality of People" queryResult={this.state.nationality} />
                     )}
                 </Row>
             </>
