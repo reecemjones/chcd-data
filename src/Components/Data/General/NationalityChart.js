@@ -6,54 +6,80 @@ function BarGraph(props) {
   const graph = useRef();
 
   const drawGraph = () => {
+
 const sample = [{
-  nationality: 'USA',
-  value: 78.9,
+  nationality: 'United States of America',
+  value: 0,
   color: '#000000'
 },
 {
-  nationality: 'Kotlin',
-  value: 75.1,
+  nationality: 'Australia',
+  value: 3,
   color: '#00a2ee'
 },
 {
-  nationality: 'Python',
-  value: 68.0,
+  nationality: 'England',
+  value: 3,
+  color: '#00a2ee'
+},
+{
+  nationality: 'Canada',
+  value: 3,
+  color: '#00a2ee'
+},
+{
+  nationality: 'China',
+  value: 27,
+  color: '#00a2ee'
+},
+{
+  nationality: 'Italy',
+  value: 10,
+  color: '#00a2ee'
+},
+{
+  nationality: 'Portugal',
+  value: 5,
+  color: '#00a2ee'
+},
+{
+  nationality: 'Spain',
+  value: 2,
   color: '#fbcb39'
 },
 {
-  nationality: 'TypeScript',
-  value: 67.0,
+  nationality: 'France',
+  value: 8,
   color: '#007bc8'
 },
 {
-  nationality: 'Go',
-  value: 65.6,
+  nationality: 'Belgium',
+  value: 3,
   color: '#65cedb'
 },
 {
-  nationality: 'Swift',
-  value: 65.1,
+  nationality: 'Austria',
+  value: 1,
   color: '#ff6e52'
 },
 {
-  nationality: 'JavaScript',
-  value: 61.9,
+  nationality: 'Germany',
+  value: 1,
   color: '#f9de3f'
 },
 {
-  nationality: 'C#',
-  value: 60.4,
+  nationality: 'Switzerland',
+  value: 2,
   color: '#5d2f8e'
 },
 {
-  nationality: 'F#',
-  value: 59.6,
+  nationality: 'Sweden',
+  value: 1,
   color: '#008fc9'
 },
 {
-  nationality: 'Clojure',
-  value: 59.6,
+  nationality: 'Norway',
+  value: 1,
   color: '#507dca'
 }
 ];
