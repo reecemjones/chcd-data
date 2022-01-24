@@ -12,6 +12,7 @@ import { Card, Spinner, Nav, Tab, Tabs } from 'react-bootstrap';
 function SwitchablePieChart(props) {
   const chart1 = useRef();
   const chart2 = useRef();
+  const cardWidth = 600;
 
   const drawChart = (data, ref) => {
       
@@ -21,7 +22,7 @@ function SwitchablePieChart(props) {
       .sort(null)
       .padAngle(.03);
     
-    const w = data.length > 5 ? 600 : 300
+    const w = cardWidth;
     const h = 320;
     const outerRadius = 300 / 2;
     const innerRadius = 100;
@@ -99,10 +100,10 @@ function SwitchablePieChart(props) {
       })
       .attr("transform", function(d,i) {
         //Just a calculation for x and y position
-        if (data.length < 5) {
-            return 'translate(-50,' + ((i*legendHeight)-40) + ')';
+        if (data.length > 4) {
+          return 'translate(160,' + ((i*legendHeight) - 160) + ')';
         } else {
-            return 'translate(160,' + ((i*legendHeight)-160) + ')';
+          return 'translate(160,' + ((i*legendHeight) - 40) + ')';
         }
       })
       .style("background-color", "gray")
@@ -119,12 +120,7 @@ function SwitchablePieChart(props) {
         .attr("x", 30)
         .attr("y", 15)
         .text(function(d, i){
-            if (data.length > 5) {
-                return `${d} (${data[i].value})`;
-            } else {
-                return d;
-            }
-            
+          return `${d} (${data[i].value})`;
         })
   }
 
@@ -135,15 +131,15 @@ function SwitchablePieChart(props) {
 
   // RETURNS PLACEHOLDER
   return ( 
-    <Card style={{ width: (props.queryResult1.length > 5 || props.queryResult2.length > 5) ? '600px' : '360px', border: 'none' }}>
+    <Card style={{ width: `${cardWidth}px`, border: 'none' }} id="pie-chart-card">
         <Card.Body>
             <Tab.Container defaultActiveKey={props.title1}>
-                <Nav variant="pills" className="flex-column">
+                <Nav variant="pills" className="flex-column" style={{width: 300}}>
                     <Nav.Item>
                         <Nav.Link eventKey={props.title1}>{props.title1}</Nav.Link>
                     </Nav.Item>
                     <Nav.Item style={{marginTop: '-20px'}}>
-                        <Nav.Link eventKey={props.title2}>{props.title2}</Nav.Link>
+                        <Nav.Link eventKey={props.title2} id="test">{props.title2}</Nav.Link>
                     </Nav.Item>
                 </Nav>
                 <Tab.Content>

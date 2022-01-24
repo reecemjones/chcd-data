@@ -89,10 +89,10 @@ class GeneralView extends Component {
                         this.sanitizeList(this.state.christianTradition, 'christian_tradition'),
                         this.sanitizeList(this.state.religiousFamily, 'religious_family'),
                         <SwitchablePieChart 
-                            title1="Christian Traditions by Total Nodes"
-                            title2="Religious Family by Total Nodes"
-                            queryResult1={this.state.christianTradition} 
-                            queryResult2={this.state.religiousFamily} />
+                            title1="Religious Family by Total Nodes"
+                            title2="Christian Traditions by Total Nodes"
+                            queryResult1={this.state.religiousFamily} 
+                            queryResult2={this.state.christianTradition} />
                     )}
                 </Row>
             </>

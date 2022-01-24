@@ -121,7 +121,9 @@ function PieChart(props) {
   return ( 
       <Card style={{ width: '360px', border: 'none' }}>
         <Card.Body>
-          <Card.Title className="fs-6 mb-4 mt-2 text-center fw-normal">{props.title}</Card.Title>
+          <Card.Title className="fs-6 text-center fw-normal" style={{marginBottom: '52px', marginTop: '30px'}}>
+            {props.title}
+          </Card.Title>
           <div ref={chart}></div>
         </Card.Body>
       </Card>
