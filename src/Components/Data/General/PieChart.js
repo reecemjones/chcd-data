@@ -12,7 +12,7 @@ import {Card, Spinner} from 'react-bootstrap';
 function PieChart(props) {
   const chart = useRef();
 
-  const drawChart = () => {
+  const drawChart = (data) => {
     // transform the value of each group to a radius that will be displayed on the chart
     const pie = d3.pie()
       .value(function(d){return d.value})
@@ -41,7 +41,7 @@ function PieChart(props) {
 
     // draw each path (pie chart section)
     const path = svg.selectAll('path')
-      .data(pie(props.queryResult))
+      .data(pie(data))
       .enter()
       .append("path")
       .attr("d", arc)
@@ -62,7 +62,7 @@ function PieChart(props) {
 
     // add labels
     const text = svg.selectAll('text')
-      .data(pie(props.queryResult))
+      .data(pie(data))
       .enter()
       .append("text")
       .transition()
@@ -93,7 +93,11 @@ function PieChart(props) {
       .attr("class", "legend" )
       .attr("transform", function(d,i) {
         //Just a calculation for x and y position
-        return 'translate(-50,' + ((i*legendHeight)-40) + ')';
+        if (data.length > 4) {
+          return 'translate(160,' + ((i*legendHeight) - 160) + ')';
+        } else {
+          return 'translate(-50,' + ((i*legendHeight) - 40) + ')';
+        }
       })
       .style("background-color", "gray")
 
@@ -114,7 +118,7 @@ function PieChart(props) {
   }
 
   useEffect(() => {
-      drawChart();
+      drawChart(props.queryResult);
   }, []);
 
   // RETURNS PLACEHOLDER
