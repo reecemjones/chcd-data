@@ -62,13 +62,6 @@ class GeneralView extends Component {
             this.renameProperty(this.state.genders[i], 'count', 'value')
         } 
     }
-    sanitizeGraph() {
-        // Loop through each list object and sanitize for d3 processing (d3 PieChart requires 'key' and 'value' object pairs)
-        for (let i = 0; i < this.state.nationality.length; i++) {
-            this.renameProperty(this.state.nationality[i], 'nationality', 'key')
-            this.renameProperty(this.state.nationality[i], 'count', 'value')
-        } 
-    }
 
     //RENDER ///////////////////////////////////////////////////////////////////////
     render() {
@@ -92,7 +85,6 @@ class GeneralView extends Component {
                 </Row>
                 <Row className="mt-4">
                     { this.state.nationality && (
-                        this.sanitizeGraph(),
                         <BarGraph title=" Nationality of People" queryResult={this.state.nationality} />
                     )}
                 </Row>
