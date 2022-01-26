@@ -485,7 +485,7 @@ export function fetchTotalEvents() {
       session.close()})
   };
 
-  //QUERY TO GET CHRISTIAN TRADITIONS OF ALL NODES
+  //QUERY TO GET RELIGIOUS FAMILIES OF ALL NODES
   export function fetchReligiousFamily() {
     const session = this.driver.session();
     const query = `
@@ -500,4 +500,33 @@ export function fetchTotalEvents() {
       session.close()})
   };
 
-  
+
+  //QUERY TO GET CHRISTIAN TRADITIONS OF NULL VALUE
+  export function fetchReligiousFamilyNullValues() {
+    const session = this.driver.session();
+    const query = `
+      MATCH (n) 
+      WITH n.religious_family AS religious_family, count(n) AS count
+      WHERE n.religious_family IS NULL
+      RETURN count AS Count
+      `
+    session.run(query).then((results) => {
+      const religiousFamilyNullValues = results.records.map((record) => record.get('Count', 'religious_family'));
+      this.setState ({ religiousFamilyNullValues })
+      session.close()})
+  };
+
+  //QUERY TO GET CHRISTIAN TRADITIONS OF NULL VALUE
+  export function fetchChristianTraditionNullValues() {
+    const session = this.driver.session();
+    const query = `
+      MATCH (n) 
+      WITH n.christian_tradition AS christian_tradition, count(n) AS count
+      WHERE n.christian_tradition IS NULL
+      RETURN count AS Count
+      `
+    session.run(query).then((results) => {
+      const christianTraditionNullValues = results.records.map((record) => record.get('Count', 'christian_tradition'));
+      this.setState ({ christianTraditionNullValues })
+      session.close()})
+  };

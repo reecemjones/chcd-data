@@ -25,7 +25,9 @@ class GeneralView extends Component {
             totalCorporateEntities: "",
             genders: "",
             christianTradition: "",
-            religiousFamily: ""
+            religiousFamily: "",
+            religiousFamilyNullValues: "",
+            christianTraditionNullValues: ""
         };
 
         // INITIATE NEO4J INSTANCE
@@ -42,6 +44,8 @@ class GeneralView extends Component {
         this.fetchGenders = query.fetchGenders.bind(this);
         this.fetchChristianTradition = query.fetchChristianTradition.bind(this);
         this.fetchReligiousFamily = query.fetchReligiousFamily.bind(this);
+        this.fetchReligiousFamilyNullValues = query.fetchReligiousFamilyNullValues.bind(this);
+        this.fetchChristianTraditionNullValues = query.fetchChristianTraditionNullValues.bind(this);
         this.renameProperty = helper.renameProperty.bind(this);
     }
 
@@ -56,6 +60,8 @@ class GeneralView extends Component {
         this.fetchGenders();
         this.fetchChristianTradition();
         this.fetchReligiousFamily();
+        this.fetchReligiousFamilyNullValues();
+        this.fetchChristianTraditionNullValues();
     }
 
     sanitizeList(list, property1,) {
@@ -91,8 +97,10 @@ class GeneralView extends Component {
                         <SwitchablePieChart 
                             title1="Religious Family by Total Nodes"
                             title2="Christian Traditions by Total Nodes"
-                            queryResult1={this.state.religiousFamily} 
-                            queryResult2={this.state.christianTradition} />
+                            queryResult1={this.state.religiousFamily}
+                            queryResult1NullValues={this.state.religiousFamilyNullValues} 
+                            queryResult2={this.state.christianTradition}
+                            queryResult2NullValues={this.state.christianTraditionNullValues} />
                     )}
                 </Row>
             </>

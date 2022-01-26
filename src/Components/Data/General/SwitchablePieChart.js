@@ -1,5 +1,6 @@
 // IMPORTS ////////////////////////////////////////////////////////////////////
 import * as d3 from "d3";
+import { color } from "d3";
 
 // MAIN DEPENDENCIES
 import React, { useEffect, useState, useRef } from "react";
@@ -145,9 +146,19 @@ function SwitchablePieChart(props) {
                 <Tab.Content>
                     <Tab.Pane eventKey={props.title1}>
                         <div ref={chart1}></div>
+                        { props.queryResult1NullValues && (
+                          <p style={{marginLeft: "45px", marginTop: "10px", color: "#444444"}}>
+                            * There are { props.queryResult1NullValues } null values
+                          </p>
+                        )}
                     </Tab.Pane>
                     <Tab.Pane eventKey={props.title2}>
                         <div ref={chart2}></div>
+                        { props.queryResult2NullValues && (
+                          <p style={{marginLeft: "45px", marginTop: "10px", color: "#444444"}}>
+                            * There are { props.queryResult2NullValues } null values
+                          </p>
+                        )}
                     </Tab.Pane>
                 </Tab.Content>
             </Tab.Container>

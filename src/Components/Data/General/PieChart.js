@@ -129,6 +129,11 @@ function PieChart(props) {
             {props.title}
           </Card.Title>
           <div ref={chart}></div>
+          { props.queryResultNullValues && (
+            <p style={{marginLeft: "45px", marginTop: "10px", color: "#444444"}}>
+              * There are { props.queryResult2NullValues } null values
+            </p>
+          )}
         </Card.Body>
       </Card>
   )
