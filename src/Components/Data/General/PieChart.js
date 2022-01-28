@@ -117,8 +117,8 @@ function PieChart(props) {
 
   // RETURNS PLACEHOLDER
   return ( 
-      <Card style={{ width: '360px', border: 'none' }}>
-        <Card.Body>
+      <Card style={{ width: '500px', border: 'none' }}>
+        <Card.Body style={{ alignSelf: 'center'}}>
           <Card.Title className="fs-6 mb-4 mt-2 text-center fw-normal">{props.title}</Card.Title>
           <div ref={chart}></div>
         </Card.Body>

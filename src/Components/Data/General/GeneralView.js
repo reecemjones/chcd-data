@@ -1,6 +1,7 @@
 // IMPORTS ////////////////////////////////////////////////////////////////////
 import TotalCount from "./TotalCount";
 import PieChart from "./PieChart";
+import ExpandList from "./ExpandList"
 import { Row } from 'react-bootstrap';
 
 // MAIN DEPENDENCIES
@@ -78,6 +79,11 @@ class GeneralView extends Component {
                         this.sanitizeList(),
                         <PieChart title="Gender By Total Number of People" queryResult={this.state.genders} />
                     )}
+                    {
+                        <ExpandList title="Most Activity" />
+                    }
+                    
+
                 </Row>
             </>
         );
