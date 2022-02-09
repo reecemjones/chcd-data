@@ -8,3 +8,9 @@
     transition: opacity .3s;
     opacity: .9;
 }
+
+.stroke-filter { 
+    paint-order: stroke;
+    stroke: rgba(0, 0, 0, 0.564);
+    stroke-width: 2px;
+}
