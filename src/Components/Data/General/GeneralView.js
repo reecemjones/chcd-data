@@ -2,7 +2,7 @@
 import TotalCount from "./TotalCount";
 import PieChart from "./PieChart";
 import { Row } from 'react-bootstrap';
-import BarGraph from "./NationalityChart";
+import BarGraph from "./BarGraph";
 
 // MAIN DEPENDENCIES
 import React, { Component } from "react";
