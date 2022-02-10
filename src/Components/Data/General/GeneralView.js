@@ -1,6 +1,7 @@
 // IMPORTS ////////////////////////////////////////////////////////////////////
 import TotalCount from "./TotalCount";
 import PieChart from "./PieChart";
+import SwitchablePieChart from "./SwitchablePieChart";
 import { Row } from 'react-bootstrap';
 import BarGraph from "./BarGraph";
 
@@ -24,7 +25,11 @@ class GeneralView extends Component {
             totalNodes: "",
             totalCorporateEntities: "",
             genders: "",
-            nationality:""
+            nationality:"",
+            christianTradition: "",
+            religiousFamily: "",
+            religiousFamilyNullValues: "",
+            christianTraditionNullValues: ""
         };
 
         // INITIATE NEO4J INSTANCE
@@ -39,6 +44,10 @@ class GeneralView extends Component {
         this.fetchTotalNodes = query.fetchTotalNodes.bind(this);
         this.fetchTotalCorporateEntities = query.fetchTotalCorporateEntities.bind(this);
         this.fetchGenders = query.fetchGenders.bind(this);
+        this.fetchChristianTradition = query.fetchChristianTradition.bind(this);
+        this.fetchReligiousFamily = query.fetchReligiousFamily.bind(this);
+        this.fetchReligiousFamilyNullValues = query.fetchReligiousFamilyNullValues.bind(this);
+        this.fetchChristianTraditionNullValues = query.fetchChristianTraditionNullValues.bind(this);
         this.renameProperty = helper.renameProperty.bind(this);
         this.fetchNationality = query.fetchNationality.bind(this);
     }
@@ -53,13 +62,17 @@ class GeneralView extends Component {
         this.fetchTotalCorporateEntities();
         this.fetchGenders();
         this.fetchNationality();
+        this.fetchChristianTradition();
+        this.fetchReligiousFamily();
+        this.fetchReligiousFamilyNullValues();
+        this.fetchChristianTraditionNullValues();
     }
 
-    sanitizeList() {
-        // Loop through each list object and sanitize for d3 processing (d3 PieChart requires 'key' and 'value' object pairs)
-        for (let i = 0; i < this.state.genders.length; i++) {
-            this.renameProperty(this.state.genders[i], 'gender', 'key')
-            this.renameProperty(this.state.genders[i], 'count', 'value')
+    sanitizeList(list, property1,) {
+        // Loop through each list object and sanitize for d3 processing (d3 PieChart.js requires 'key' and 'value' object pairs)
+        for (let i = 0; i < list.length; i++) {
+            this.renameProperty(list[i], property1, 'key')
+            this.renameProperty(list[i], 'count', 'value')
         } 
     }
 
@@ -79,13 +92,22 @@ class GeneralView extends Component {
                 </Row>
                 <Row className="mt-4">
                     { this.state.genders && (
-                        this.sanitizeList(),
+                        this.sanitizeList(this.state.genders, 'gender'),
                         <PieChart title="Gender By Total Number of People" queryResult={this.state.genders} />
                     )}
-                </Row>
-                <Row className="mt-4">
                     { this.state.nationality && (
                         <BarGraph title=" Nationality of People" queryResult={this.state.nationality} />
+                    )}
+                    { (this.state.christianTradition && this.state.religiousFamily) && (
+                        this.sanitizeList(this.state.christianTradition, 'christian_tradition'),
+                        this.sanitizeList(this.state.religiousFamily, 'religious_family'),
+                        <SwitchablePieChart 
+                            title1="Religious Family by Total Nodes"
+                            title2="Christian Traditions by Total Nodes"
+                            queryResult1={this.state.religiousFamily}
+                            queryResult1NullValues={this.state.religiousFamilyNullValues} 
+                            queryResult2={this.state.christianTradition}
+                            queryResult2NullValues={this.state.christianTraditionNullValues} />
                     )}
                 </Row>
             </>
