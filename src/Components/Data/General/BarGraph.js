@@ -38,8 +38,9 @@ function BarGraph(props) {
           .style("text-anchor", "end");
       
       // Add Y axis
+      const max = Math.max.apply(Math, data.map(function(o) { return o.count; }))
       var y = d3.scaleLinear()
-        .domain([0, 30])
+        .domain([0, max])
         .range([ height, 0]);
       svg.append("g")
         .call(d3.axisLeft(y));
@@ -53,7 +54,8 @@ function BarGraph(props) {
           .attr("y", function(d) { return y(d.count); })
           .attr("width", x.bandwidth())
           .attr("height", function(d) { return height - y(d.count); })
-          .attr("fill", "#69b3a2")
+          .attr("fill", "#4e79a7")
+          .attr("class", "bar")
       
     }, [data]);
 
@@ -61,7 +63,7 @@ function BarGraph(props) {
       <Card style={{ width: "500px", height: "450px", border: "none" }}>
         <Card.Body>
           <Card.Title>
-          <Card.Title className="fs-6 mb-4 mt-2 text-center fw-normal">{props.title}</Card.Title>
+          <Card.Title className="fs-6 mb-4 mt-4 text-center fw-normal">{props.title}</Card.Title>
             <div ref={svgRef}>
             </div>
           </Card.Title>

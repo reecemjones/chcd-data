@@ -90,7 +90,7 @@ class GeneralView extends Component {
                         <TotalCount type="Corporate Entities" queryResult={this.state.totalCorporateEntities} />
                     </div>
                 </Row>
-                <Row className="mt-4">
+                <Row className="mt-4 w-100 bg-white justify-content-around">
                     { this.state.genders && (
                         this.sanitizeList(this.state.genders, 'gender'),
                         <PieChart title="Gender By Total Number of People" queryResult={this.state.genders} />
