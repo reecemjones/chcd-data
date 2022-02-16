@@ -64,8 +64,12 @@ function BarGraph(props) {
         <Card.Body>
           <Card.Title>
           <Card.Title className="fs-6 mb-4 mt-4 text-center fw-normal">{props.title}</Card.Title>
-            <div ref={svgRef}>
-            </div>
+            <div ref={svgRef}> </div>
+            { props.queryResultNationalityNull && (
+                          <p style={{marginLeft: "45px", marginTop: "10px", color: "#444444"}}>
+                            * There are { props.queryResultNationalityNull } null values
+                          </p>
+                        )}
           </Card.Title>
         </Card.Body>
        </Card>

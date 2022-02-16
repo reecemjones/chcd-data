@@ -139,7 +139,7 @@ function SwitchablePieChart(props) {
                     <Nav.Item>
                         <Nav.Link eventKey={props.title1}>{props.title1}</Nav.Link>
                     </Nav.Item>
-                    <Nav.Item style={{marginTop: '-20px'}}>
+                    <Nav.Item style={{marginTop: '0px'}}>
                         <Nav.Link eventKey={props.title2} id="test">{props.title2}</Nav.Link>
                     </Nav.Item>
                 </Nav>

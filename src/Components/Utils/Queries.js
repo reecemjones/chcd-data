@@ -483,6 +483,20 @@ export function fetchTotalEvents() {
       this.setState ({ nationality })
       session.close()})
   };
+
+    //Query to get Nationality of all people
+    export function fetchNationalityNull() {
+      const session = this.driver.session();
+      const query = `MATCH (n:Person) 
+      WITH n.nationality AS nationality, count(n) AS count
+      WHERE n.nationality IS NULL
+      RETURN count as Count
+      `
+      session.run(query).then((results) => {
+        const nationalityNull = results.records.map((record) => record.get('Count', 'nationality'));
+        this.setState ({ nationalityNull })
+        session.close()})
+    };
   
   //QUERY TO GET CHRISTIAN TRADITIONS OF ALL NODES
   export function fetchChristianTradition() {
