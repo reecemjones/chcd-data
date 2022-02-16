@@ -2,6 +2,7 @@
 import TotalCount from "./TotalCount";
 import PieChart from "./PieChart";
 import SwitchablePieChart from "./SwitchablePieChart";
+import SwitchableLineChart from "./SwitchableLineChart";
 import { Row } from 'react-bootstrap';
 
 // MAIN DEPENDENCIES
