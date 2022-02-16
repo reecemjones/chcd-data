@@ -23,7 +23,10 @@ class GeneralView extends Component {
             totalEvents: "",
             totalNodes: "",
             totalCorporateEntities: "",
-            genders: ""
+            genders: "",
+            provinces:"",
+            prefectures:"",
+            counties:""
         };
 
         // INITIATE NEO4J INSTANCE
@@ -39,6 +42,10 @@ class GeneralView extends Component {
         this.fetchTotalCorporateEntities = query.fetchTotalCorporateEntities.bind(this);
         this.fetchGenders = query.fetchGenders.bind(this);
         this.renameProperty = helper.renameProperty.bind(this);
+        this.fetchProvinces = query.fetchProvinces.bind(this);
+        this.fetchPrefectures = query.fetchPrefectures.bind(this);
+        this.fetchCounties = query.fetchCounties.bind(this);
+
     }
 
     //RUN ON COMPONENT MOUNT //////////////////////////////////////////////////////
@@ -50,6 +57,9 @@ class GeneralView extends Component {
         this.fetchTotalNodes();
         this.fetchTotalCorporateEntities();
         this.fetchGenders();
+        this.fetchProvinces();
+        this.fetchPrefectures();
+        this.fetchCounties();
     }
 
     sanitizeList() {
@@ -62,6 +72,7 @@ class GeneralView extends Component {
 
     //RENDER ///////////////////////////////////////////////////////////////////////
     render() {
+        console.log(this.state.provinces);
         return (
             <>
                 <Row className="bg-white">
@@ -74,16 +85,18 @@ class GeneralView extends Component {
                         <TotalCount type="Corporate Entities" queryResult={this.state.totalCorporateEntities} />
                     </div>
                 </Row>
+
                 <Row className="mt-4">
                     { this.state.genders && (
                         this.sanitizeList(),
                         <PieChart title="Gender By Total Number of People" queryResult={this.state.genders} />
                     )}
-                    {
-                        <ExpandList title="Most Activity" />
-                    }
-                    
+                </Row>
 
+                <Row className="mt-4">
+                    {
+                        <ExpandList title="Most Activity" queryResult={[this.state.provinces, this.state.prefectures, this.state.counties]} />
+                    }
                 </Row>
             </>
         );
