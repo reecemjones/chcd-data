@@ -1,5 +1,6 @@
 // IMPORTS ////////////////////////////////////////////////////////////////////
 import GeneralView from './General/GeneralView';
+import CorporateEntityView from './CorporateEntity/CorporateEntityView';
 
 // MAIN DEPENDENCIES
 import React from 'react'
@@ -37,7 +38,7 @@ function DataCharts(props) {
                   <GeneralView />
                 </Tab.Pane>
                 <Tab.Pane eventKey="corporate-entity-view">
-                  Corporate entity data
+                  <CorporateEntityView />
                 </Tab.Pane>
                 <Tab.Pane eventKey="institution-view">
                   Institution data
