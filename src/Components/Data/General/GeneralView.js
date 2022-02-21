@@ -3,6 +3,7 @@ import TotalCount from "./TotalCount";
 import PieChart from "./PieChart";
 import SwitchablePieChart from "./SwitchablePieChart";
 import { Row } from 'react-bootstrap';
+import BarGraph from "./BarGraph";
 
 // MAIN DEPENDENCIES
 import React, { Component } from "react";
@@ -24,6 +25,8 @@ class GeneralView extends Component {
             totalNodes: "",
             totalCorporateEntities: "",
             genders: "",
+            nationality:"",
+            nationalityNull:"",
             christianTradition: "",
             religiousFamily: "",
             religiousFamilyNullValues: "",
@@ -47,6 +50,8 @@ class GeneralView extends Component {
         this.fetchReligiousFamilyNullValues = query.fetchReligiousFamilyNullValues.bind(this);
         this.fetchChristianTraditionNullValues = query.fetchChristianTraditionNullValues.bind(this);
         this.renameProperty = helper.renameProperty.bind(this);
+        this.fetchNationality = query.fetchNationality.bind(this);
+        this.fetchNationalityNull = query.fetchNationalityNull.bind(this);
     }
 
     //RUN ON COMPONENT MOUNT //////////////////////////////////////////////////////
@@ -58,6 +63,8 @@ class GeneralView extends Component {
         this.fetchTotalNodes();
         this.fetchTotalCorporateEntities();
         this.fetchGenders();
+        this.fetchNationality();
+        this.fetchNationalityNull();
         this.fetchChristianTradition();
         this.fetchReligiousFamily();
         this.fetchReligiousFamilyNullValues();
@@ -86,10 +93,17 @@ class GeneralView extends Component {
                         <TotalCount type="Corporate Entities" queryResult={this.state.totalCorporateEntities} />
                     </div>
                 </Row>
-                <Row className="mt-4">
+                <Row className="mt-4 w-100 bg-white justify-content-around">
+                    {console.log(this.state.nationalityNull)}
                     { this.state.genders && (
                         this.sanitizeList(this.state.genders, 'gender'),
                         <PieChart title="Gender By Total Number of People" queryResult={this.state.genders} />
+                    )}
+                    { this.state.nationality && (
+                        <BarGraph title="Nationality of People" 
+                        queryResult={this.state.nationality}
+                        queryResultNationalityNull={this.state.nationalityNull}
+                        />
                     )}
                     { (this.state.christianTradition && this.state.religiousFamily) && (
                         this.sanitizeList(this.state.christianTradition, 'christian_tradition'),
