@@ -470,6 +470,51 @@ export function fetchTotalEvents() {
       session.close()})
   };
 
+  //QUERY TO GET ACTIVITY FOR PROVINCES.
+  export function fetchProvinces() {
+    const session = this.driver.session();
+    const query = `MATCH (n:Province) 
+        UNWIND n as x
+        MATCH (x:Province{name_wes:x.name_wes})<-[:INSIDE_OF]-(Person)
+        RETURN DISTINCT {Province : x.name_wes, Activity: count (Person)} AS List
+        ORDER BY List.Activity DESC LIMIT 10
+      `
+    session.run(query).then((results) => {
+      const provinces = results.records.map((record) => record.get('List', 'Activity'));
+      this.setState ({ provinces })
+      session.close()})
+  };
+
+  //QUERY TO GET ACTIVITY FOR PREFECTURES.
+  export function fetchPrefectures() {
+    const session = this.driver.session();
+    const query = `MATCH (n:Prefecture) 
+        UNWIND n as x
+        MATCH (x:Prefecture{name_wes:x.name_wes})<-[:INSIDE_OF]-(Person)
+        RETURN DISTINCT {Prefecture : x.name_wes, Activity: count (Person)} AS List
+        ORDER BY List.Activity DESC LIMIT 10
+      `
+    session.run(query).then((results) => {
+      const prefectures = results.records.map((record) => record.get('List', 'Activity'));
+      this.setState ({ prefectures })
+      session.close()})
+  };
+
+  //QUERY TO GET ACTIVITY FOR COUNTIES.
+  export function fetchCounties() {
+    const session = this.driver.session();
+    const query = `MATCH (n:County) 
+        UNWIND n as x
+        MATCH (x:County{name_wes:x.name_wes})<-[:LOCATED_IN]-(Person)
+        RETURN DISTINCT {County : x.name_wes, Activity: count (Person)}  AS List
+        ORDER BY List.Activity DESC LIMIT 10
+      `
+    session.run(query).then((results) => {
+      const counties = results.records.map((record) => record.get('List', 'Activity'));
+      this.setState ({ counties })
+      session.close()})
+    };
+
   //Query to get Nationality of all people
   export function fetchNationality() {
     const session = this.driver.session();

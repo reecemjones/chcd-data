@@ -1,6 +1,7 @@
 // IMPORTS ////////////////////////////////////////////////////////////////////
 import TotalCount from "./TotalCount";
 import PieChart from "./PieChart";
+import ExpandList from "./ExpandList"
 import SwitchablePieChart from "./SwitchablePieChart";
 import { Row } from 'react-bootstrap';
 import BarGraph from "./BarGraph";
@@ -25,6 +26,9 @@ class GeneralView extends Component {
             totalNodes: "",
             totalCorporateEntities: "",
             genders: "",
+            provinces:"",
+            prefectures:"",
+            counties:"",
             nationality:"",
             nationalityNull:"",
             christianTradition: "",
@@ -50,6 +54,9 @@ class GeneralView extends Component {
         this.fetchReligiousFamilyNullValues = query.fetchReligiousFamilyNullValues.bind(this);
         this.fetchChristianTraditionNullValues = query.fetchChristianTraditionNullValues.bind(this);
         this.renameProperty = helper.renameProperty.bind(this);
+        this.fetchProvinces = query.fetchProvinces.bind(this);
+        this.fetchPrefectures = query.fetchPrefectures.bind(this);
+        this.fetchCounties = query.fetchCounties.bind(this);
         this.fetchNationality = query.fetchNationality.bind(this);
         this.fetchNationalityNull = query.fetchNationalityNull.bind(this);
     }
@@ -63,6 +70,9 @@ class GeneralView extends Component {
         this.fetchTotalNodes();
         this.fetchTotalCorporateEntities();
         this.fetchGenders();
+        this.fetchProvinces();
+        this.fetchPrefectures();
+        this.fetchCounties();
         this.fetchNationality();
         this.fetchNationalityNull();
         this.fetchChristianTradition();
@@ -81,6 +91,7 @@ class GeneralView extends Component {
 
     //RENDER ///////////////////////////////////////////////////////////////////////
     render() {
+        console.log(this.state.provinces);
         return (
             <>
                 <Row className="bg-white">
@@ -94,7 +105,6 @@ class GeneralView extends Component {
                     </div>
                 </Row>
                 <Row className="mt-4 w-100 bg-white justify-content-around">
-                    {console.log(this.state.nationalityNull)}
                     { this.state.genders && (
                         this.sanitizeList(this.state.genders, 'gender'),
                         <PieChart title="Gender By Total Number of People" queryResult={this.state.genders} />
@@ -116,6 +126,12 @@ class GeneralView extends Component {
                             queryResult2={this.state.christianTradition}
                             queryResult2NullValues={this.state.christianTraditionNullValues} />
                     )}
+                </Row>
+
+                <Row className="mt-4">
+                    {
+                        <ExpandList title="Most Activity" queryResult={[this.state.provinces, this.state.prefectures, this.state.counties]} />
+                    }
                 </Row>
             </>
         );
