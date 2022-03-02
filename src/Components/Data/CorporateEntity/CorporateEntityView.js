@@ -12,6 +12,10 @@ import * as helper from "../../Utils/Helpers.js";
 class CorporateEntityView extends Component {
     //STATE, PROPS, DRIVER INFO, & BINDS
     constructor(props) {
+        super(props);
+        this.state = {
+
+        };
 
     // INITIATE NEO4J INSTANCE
     this.driver = neo4j.driver(credentials.port, neo4j.auth.basic(credentials.username, credentials.password), {
@@ -31,7 +35,7 @@ class CorporateEntityView extends Component {
         return (
             <>
                 <Row>
-
+                    
                 </Row>
             </>
         );
