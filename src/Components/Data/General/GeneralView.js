@@ -3,8 +3,9 @@ import TotalCount from "./TotalCount";
 import PieChart from "./PieChart";
 import ExpandList from "./ExpandList"
 import SwitchablePieChart from "./SwitchablePieChart";
-import { Row } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import BarGraph from "./BarGraph";
+import LineChart from "./LineChart";
 
 // MAIN DEPENDENCIES
 import React, { Component } from "react";
@@ -94,45 +95,59 @@ class GeneralView extends Component {
         console.log(this.state.provinces);
         return (
             <>
-                <Row className="bg-white">
-                    <div className="d-flex flex-wrap flex-row justify-content-center">
-                        <TotalCount type="Nodes" queryResult={this.state.totalNodes} />
-                        <TotalCount type="Relationships" queryResult={this.state.totalRelationships} />
-                        <TotalCount type="People" queryResult={this.state.totalPeople} />
-                        <TotalCount type="Institutions" queryResult={this.state.totalInstitutions} />
-                        <TotalCount type="Events" queryResult={this.state.totalEvents} />
-                        <TotalCount type="Corporate Entities" queryResult={this.state.totalCorporateEntities} />
-                    </div>
-                </Row>
-                <Row className="mt-4 w-100 bg-white justify-content-around">
-                    { this.state.genders && (
-                        this.sanitizeList(this.state.genders, 'gender'),
-                        <PieChart title="Gender By Total Number of People" queryResult={this.state.genders} />
-                    )}
-                    { this.state.nationality && (
-                        <BarGraph title="Nationality of People" 
-                        queryResult={this.state.nationality}
-                        queryResultNationalityNull={this.state.nationalityNull}
-                        />
-                    )}
-                    { (this.state.christianTradition && this.state.religiousFamily) && (
-                        this.sanitizeList(this.state.christianTradition, 'christian_tradition'),
-                        this.sanitizeList(this.state.religiousFamily, 'religious_family'),
-                        <SwitchablePieChart 
-                            title1="Religious Family by Total Nodes"
-                            title2="Christian Traditions by Total Nodes"
-                            queryResult1={this.state.religiousFamily}
-                            queryResult1NullValues={this.state.religiousFamilyNullValues} 
-                            queryResult2={this.state.christianTradition}
-                            queryResult2NullValues={this.state.christianTraditionNullValues} />
-                    )}
-                </Row>
-
-                <Row className="mt-4">
-                    {
-                        <ExpandList title="Most Activity" queryResult={[this.state.provinces, this.state.prefectures, this.state.counties]} />
-                    }
-                </Row>
+                <Col>
+                    <Row className="bg-white">
+                        <div className="d-flex flex-wrap flex-row justify-content-center">
+                            <TotalCount type="Nodes" queryResult={this.state.totalNodes} />
+                            <TotalCount type="Relationships" queryResult={this.state.totalRelationships} />
+                            <TotalCount type="People" queryResult={this.state.totalPeople} />
+                            <TotalCount type="Institutions" queryResult={this.state.totalInstitutions} />
+                            <TotalCount type="Events" queryResult={this.state.totalEvents} />
+                            <TotalCount type="Corporate Entities" queryResult={this.state.totalCorporateEntities} />
+                        </div>
+                    </Row>
+                </Col>
+                <Col>
+                    <Row className="mt-4 w-100 bg-white justify-content-around">
+                        { this.state.genders && (
+                            this.sanitizeList(this.state.genders, 'gender'),
+                            <PieChart title="Gender By Total Number of People" queryResult={this.state.genders} />
+                        )}
+                    </Row>
+                </Col>
+                <Col>
+                    <Row>
+                        { this.state.nationality && (
+                            <BarGraph title="Nationality of People" 
+                            queryResult={this.state.nationality}
+                            queryResultNationalityNull={this.state.nationalityNull}
+                            />
+                        )}
+                    </Row>
+                </Col>
+                    <Row>
+                        { (this.state.christianTradition && this.state.religiousFamily) && (
+                            this.sanitizeList(this.state.christianTradition, 'christian_tradition'),
+                            this.sanitizeList(this.state.religiousFamily, 'religious_family'),
+                            <SwitchablePieChart 
+                                title1="Religious Family by Total Nodes"
+                                title2="Christian Traditions by Total Nodes"
+                                queryResult1={this.state.religiousFamily}
+                                queryResult1NullValues={this.state.religiousFamilyNullValues} 
+                                queryResult2={this.state.christianTradition}
+                                queryResult2NullValues={this.state.christianTraditionNullValues} />
+                        )}
+                    </Row>
+                <Col>
+                    <Row className="mt-4">
+                        {
+                            <ExpandList title="Most Activity" queryResult={[this.state.provinces, this.state.prefectures, this.state.counties]} />
+                        }
+                        {
+                            <LineChart></LineChart>
+                        }
+                    </Row>
+                </Col>
             </>
         );
     }
