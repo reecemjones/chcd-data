@@ -1,5 +1,6 @@
 // IMPORTS ////////////////////////////////////////////////////////////////////
 import { Row } from 'react-bootstrap';
+import BarGraph from '../General/BarGraph';
 
 // MAIN DEPENDENCIES
 import React, { Component } from "react";
@@ -14,7 +15,8 @@ class CorporateEntityView extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
+        nationality:"",
+        nationalityNull:"",
         };
 
     // INITIATE NEO4J INSTANCE
@@ -23,19 +25,35 @@ class CorporateEntityView extends Component {
     });
 
     // BIND UTILITY FUNCTIONS TO THIS CONTEXT
-
+    this.fetchNationality = query.fetchNationality.bind(this);
+    this.fetchNationalityNull = query.fetchNationalityNull.bind(this);
     }
     //RUN ON COMPONENT MOUNT //////////////////////////////////////////////////////
     componentDidMount() {
+    this.fetchNationality();
+    this.fetchNationalityNull();
+    }
 
+    sanitizeList(list, property1,) {
+        // Loop through each list object and sanitize for d3 processing (d3 PieChart.js requires 'key' and 'value' object pairs)
+        for (let i = 0; i < list.length; i++) {
+            this.renameProperty(list[i], property1, 'key')
+            this.renameProperty(list[i], 'count', 'value')
+        } 
     }
 
     //RENDER ///////////////////////////////////////////////////////////////////////
     render() {
         return (
             <>
-                <Row>
-                    
+                <Row className="mt-4 w-100 bg-white justify-content-around">
+                {
+                this.state.nationality && (
+                <BarGraph title="Nationality of People" 
+                queryResult={this.state.nationality}
+                queryResultNationalityNull={this.state.nationalityNull}
+                />
+                )}
                 </Row>
             </>
         );
