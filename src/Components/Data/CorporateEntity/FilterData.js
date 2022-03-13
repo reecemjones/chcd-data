@@ -16,29 +16,29 @@ function FilterData(props) {
      <Col>
        <Form.Group>
          <Row><Col>
-           <Form.Label className="filter_label mb-0">Start Year</Form.Label>
-           <Form.Control type="text" name="start_time" value={props.start_time} onChange={(i) =>  props.handleChange(i)}/>
+           {/* <Form.Label className="filter_label mb-0">Start Year</Form.Label> */}
+           {/* <Form.Control type="text" name="start_time" value={props.start_time} onChange={(i) =>  props.handleChange(i)}/> */}
          </Col></Row>
        </Form.Group>
      </Col>
        <Col>
          <Form.Group>
            <Row><Col>
-             <Form.Label className="filter_label mb-0">End Year</Form.Label>
-             <Form.Control type="text" name="end_time" value={props.end_time} onChange={(i) =>  props.handleChange(i)}/>
+             {/* <Form.Label className="filter_label mb-0">End Year</Form.Label> */}
+             {/* <Form.Control type="text" name="end_time" value={props.end_time} onChange={(i) =>  props.handleChange(i)}/> */}
            </Col></Row>
          </Form.Group>
        </Col>
      </Row>
 
        <Form.Group className="mb-2"><Row><Col>
-           <Row><Col><Form.Label className="filter_label mb-0">Person</Form.Label></Col></Row>
+           {/* <Row><Col><Form.Label className="filter_label mb-0">Person</Form.Label></Col></Row> */}
            <Row><Col>
-           <Select
+           {/* <Select
            options={props.netPersonIndex}
            value={props.netPersonIndex.value}
            onChange={(option) =>  props.handleChangeData(option)}
-           />
+           /> */}
              </Col></Row>
        </Col></Row></Form.Group>
 
