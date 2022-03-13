@@ -5,7 +5,7 @@ import React, { Component } from 'react'
 import neo4j from "neo4j-driver/lib/browser/neo4j-web";
 // CHILD COMPONENTS
 import FilterData from "./FilterData.js";
-import DataCharts from "./DataCharts.js"
+// import DataCharts from "./DataCharts.js"
 import Popup from "../Popups/Popup.js";
 import NoResults from "../Popups/NoResults.js";
 import Navbar from "../Navbar/Navbar.js";
@@ -96,7 +96,7 @@ class DataView extends Component {
         fetchNetworkIndexes={this.fetchNetworkIndexes}
         handleChangeData={this.handleChangeData}
       />
-      <DataCharts {...this.state} />
+      {/* <DataCharts {...this.state} /> */}
       </div>
     )
   }
