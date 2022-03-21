@@ -3,8 +3,9 @@ import TotalCount from "./TotalCount";
 import PieChart from "./PieChart";
 import ExpandList from "./ExpandList"
 import SwitchablePieChart from "./SwitchablePieChart";
-import { Row } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import BarGraph from "./BarGraph";
+import FilterData from "../FilterData.js";
 
 // MAIN DEPENDENCIES
 import React, { Component } from "react";
@@ -94,27 +95,29 @@ class GeneralView extends Component {
         console.log(this.state.provinces);
         return (
             <>
-                <Row className="bg-white">
-                    <div className="d-flex flex-wrap flex-row justify-content-center">
-                        <TotalCount type="Nodes" queryResult={this.state.totalNodes} />
-                        <TotalCount type="Relationships" queryResult={this.state.totalRelationships} />
-                        <TotalCount type="People" queryResult={this.state.totalPeople} />
-                        <TotalCount type="Institutions" queryResult={this.state.totalInstitutions} />
-                        <TotalCount type="Events" queryResult={this.state.totalEvents} />
-                        <TotalCount type="Corporate Entities" queryResult={this.state.totalCorporateEntities} />
-                    </div>
-                </Row>
-                <Row className="mt-4 w-100 bg-white justify-content-around">
+                <div className="d-flex flex-wrap flex-row justify-content-center">
+                    <TotalCount type="Nodes" queryResult={this.state.totalNodes} />
+                    <TotalCount type="Relationships" queryResult={this.state.totalRelationships} />
+                    <TotalCount type="People" queryResult={this.state.totalPeople} />
+                    <TotalCount type="Institutions" queryResult={this.state.totalInstitutions} />
+                    <TotalCount type="Events" queryResult={this.state.totalEvents} />
+                    <TotalCount type="Corporate Entities" queryResult={this.state.totalCorporateEntities} />
+                </div>
+                <div className="w-100 bg-white d-flex justify-content-center pb-5">
                     { this.state.genders && (
                         this.sanitizeList(this.state.genders, 'gender'),
                         <PieChart title="Gender By Total Number of People" queryResult={this.state.genders} />
                     )}
+                </div>
+                <div className="w-100 bg-white d-flex justify-content-center pb-5">
                     { this.state.nationality && (
                         <BarGraph title="Nationality of People" 
                         queryResult={this.state.nationality}
                         queryResultNationalityNull={this.state.nationalityNull}
                         />
                     )}
+                </div>
+                <div className="w-100 bg-white d-flex justify-content-center pb-4">
                     { (this.state.christianTradition && this.state.religiousFamily) && (
                         this.sanitizeList(this.state.christianTradition, 'christian_tradition'),
                         this.sanitizeList(this.state.religiousFamily, 'religious_family'),
@@ -126,13 +129,10 @@ class GeneralView extends Component {
                             queryResult2={this.state.christianTradition}
                             queryResult2NullValues={this.state.christianTraditionNullValues} />
                     )}
-                </Row>
-
-                <Row className="mt-4">
-                    {
-                        <ExpandList title="Most Activity" queryResult={[this.state.provinces, this.state.prefectures, this.state.counties]} />
-                    }
-                </Row>
+                </div>
+                <div className="w-100 bg-white d-flex justify-content-center pb-4">
+                    <ExpandList title="Most Activity" queryResult={[this.state.provinces, this.state.prefectures, this.state.counties]} />
+                </div>
             </>
         );
     }
