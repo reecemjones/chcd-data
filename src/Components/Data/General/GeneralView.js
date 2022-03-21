@@ -114,13 +114,13 @@ class GeneralView extends Component {
                         <TotalCount type="Events" queryResult={this.state.totalEvents} />
                         <TotalCount type="Corporate Entities" queryResult={this.state.totalCorporateEntities} />
                     </div>
-                    <div className="w-100 bg-white d-flex justify-content-center pb-5">
+                    <div className="d-flex justify-content-center pb-5">
                         { this.state.genders && (
                             this.sanitizeList(this.state.genders, 'gender'),
                             <PieChart title="Gender By Total Number of People" queryResult={this.state.genders} />
                         )}
                     </div>
-                    <div className="w-100 bg-white d-flex justify-content-center pb-5">
+                    <div className="d-flex justify-content-center pb-5">
                         { this.state.nationality && (
                             <BarGraph title="Nationality of People" 
                             queryResult={this.state.nationality}
@@ -128,7 +128,7 @@ class GeneralView extends Component {
                             />
                         )}
                     </div>
-                    <div className="w-100 bg-white d-flex justify-content-center pb-4">
+                    <div className="d-flex justify-content-center pb-4">
                         { (this.state.christianTradition && this.state.religiousFamily) && (
                             this.sanitizeList(this.state.christianTradition, 'christian_tradition'),
                             this.sanitizeList(this.state.religiousFamily, 'religious_family'),
@@ -141,7 +141,7 @@ class GeneralView extends Component {
                                 queryResult2NullValues={this.state.christianTraditionNullValues} />
                         )}
                     </div>
-                    <div className="w-100 bg-white d-flex justify-content-center pb-4">
+                    <div className="d-flex justify-content-center pb-4">
                         <ExpandList title="Most Activity" queryResult={[this.state.provinces, this.state.prefectures, this.state.counties]} />
                     </div>
                 </div>

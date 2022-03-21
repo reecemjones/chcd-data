@@ -54,7 +54,9 @@ class CorporateEntityView extends Component {
                     // fetchNetworkIndexes={this.fetchNetworkIndexes}
                     // handleChangeData={this.handleChangeData}
                 />
-                <NavigationDataViews active="general"/>
+                <div className='list_float'>
+                    <NavigationDataViews active="general"/>
+                </div>
             </div>
         );
     }
