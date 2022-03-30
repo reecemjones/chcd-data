@@ -36,7 +36,7 @@ function FilterData(props) {
            {<Form.Select size="sm">
              {<option>select one</option>}
             {
-              Array.from(props.corporateEntities).map((item) => {    
+              Array.from(props.corporateEntitiesWesternNames).map((item) => {    
                 return[
                   <option>{item}</option>
                 ] 
