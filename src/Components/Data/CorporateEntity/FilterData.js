@@ -11,7 +11,6 @@ function FilterData(props) {
      <div className="filter_header">Data Parameters</div>
      <div className="filter_scroll_area mb-4">
      <Form>
-
      <Row className="mb-2">
      <Col>
        <Form.Group>
@@ -32,13 +31,17 @@ function FilterData(props) {
      </Row>
 
        <Form.Group className="mb-2"><Row><Col>
-           {/* <Row><Col><Form.Label className="filter_label mb-0">Person</Form.Label></Col></Row> */}
+           { <Row><Col><Form.Label className="filter_label mb-0">Corporate Entity</Form.Label></Col></Row>}
            <Row><Col>
-           {/* <Select
-           options={props.netPersonIndex}
-           value={props.netPersonIndex.value}
-           onChange={(option) =>  props.handleChangeData(option)}
-           /> */}
+           {<Form.Select size="sm">
+             {<option>select one</option>}
+            {
+              Array.from(props.corporateEntities).map((item) => {    
+                return[
+                  <option>{item}</option>
+                ] 
+              })}
+            </Form.Select>}
              </Col></Row>
        </Col></Row></Form.Group>
 
