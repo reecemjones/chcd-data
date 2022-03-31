@@ -146,7 +146,7 @@ class GeneralView extends Component {
                         <ExpandList title="Most Activity" queryResult={[this.state.provinces, this.state.prefectures, this.state.counties]} />
                     </div>
                     <div className="d-flex justify-content-center pb-4">
-                        <LineChart />
+                        <LineChart title="Number of Instutions by Year" />
                     </div>
                 </div>
             </div>

@@ -75,7 +75,10 @@ function LineChart(props) {
     }, []);
 
     return (
-      <Card style={{ width: "500px", height: "450px", border: "none" }}>
+      <Card style={{ width: "500px", height: "500px", border: "none" }}>
+        <Card.Title className="fs-6 text-center fw-normal" style={{marginTop: '30px'}}>
+            {props.title}
+          </Card.Title>
           <div id="chart"></div>
        </Card>
     );
