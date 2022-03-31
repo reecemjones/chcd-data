@@ -1,11 +1,13 @@
 // IMPORTS ////////////////////////////////////////////////////////////////////
-import TotalCount from "./TotalCount";
-import PieChart from "./PieChart";
-import ExpandList from "./ExpandList"
-import SwitchablePieChart from "./SwitchablePieChart";
+import TotalCount from "../Visualizations/TotalCount";
+import PieChart from "../Visualizations/PieChart";
+import ExpandList from "../Visualizations/ExpandList"
+import SwitchablePieChart from "../Visualizations/SwitchablePieChart";
+import LineChart from "../Visualizations/LineChart";
 import { Row, Col } from 'react-bootstrap';
-import BarGraph from "./BarGraph";
-import LineChart from "./LineChart";
+import BarGraph from "../Visualizations/BarGraph";
+import Navbar from "../../Navbar/Navbar.js";
+import NavigationDataViews from "../NavigationDataViews";
 
 // MAIN DEPENDENCIES
 import React, { Component } from "react";
@@ -20,6 +22,8 @@ class GeneralView extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            language: "en",
+            // QUERIES
             totalPeople: "",
             totalRelationships: "",
             totalInstitutions: "",
@@ -43,6 +47,10 @@ class GeneralView extends Component {
             disableLosslessIntegers: true
         });
         // BIND UTILITY FUNCTIONS TO THIS CONTEXT
+        this.langSwitch = helper.langSwitch.bind(this);
+        this.selectSwitchInitial = query.selectSwitchInitial.bind(this);
+
+        // QUERIES
         this.fetchTotalPeople = query.fetchTotalPeople.bind(this);
         this.fetchTotalRelationship = query.fetchTotalRelationship.bind(this);
         this.fetchTotalInstitutions = query.fetchTotalInstitutions.bind(this);
@@ -92,40 +100,36 @@ class GeneralView extends Component {
 
     //RENDER ///////////////////////////////////////////////////////////////////////
     render() {
-        console.log(this.state.provinces);
         return (
-            <>
-                <Col>
-                    <Row className="bg-white">
-                        <div className="d-flex flex-wrap flex-row justify-content-center">
-                            <TotalCount type="Nodes" queryResult={this.state.totalNodes} />
-                            <TotalCount type="Relationships" queryResult={this.state.totalRelationships} />
-                            <TotalCount type="People" queryResult={this.state.totalPeople} />
-                            <TotalCount type="Institutions" queryResult={this.state.totalInstitutions} />
-                            <TotalCount type="Events" queryResult={this.state.totalEvents} />
-                            <TotalCount type="Corporate Entities" queryResult={this.state.totalCorporateEntities} />
-                        </div>
-                    </Row>
-                </Col>
-                <Col>
-                    <Row className="mt-4 w-100 bg-white justify-content-around">
+            <div className="bg-light">
+                <Navbar language={this.state.language} langSwitch={this.langSwitch}/>
+                <NavigationDataViews active="general"/>
+                
+                {/* Data Visualizations */}
+                <div>
+                    <div className="d-flex flex-wrap flex-row justify-content-center">
+                        <TotalCount type="Nodes" queryResult={this.state.totalNodes} />
+                        <TotalCount type="Relationships" queryResult={this.state.totalRelationships} />
+                        <TotalCount type="People" queryResult={this.state.totalPeople} />
+                        <TotalCount type="Institutions" queryResult={this.state.totalInstitutions} />
+                        <TotalCount type="Events" queryResult={this.state.totalEvents} />
+                        <TotalCount type="Corporate Entities" queryResult={this.state.totalCorporateEntities} />
+                    </div>
+                    <div className="d-flex justify-content-center pb-5">
                         { this.state.genders && (
                             this.sanitizeList(this.state.genders, 'gender'),
                             <PieChart title="Gender By Total Number of People" queryResult={this.state.genders} />
                         )}
-                    </Row>
-                </Col>
-                <Col>
-                    <Row>
+                    </div>
+                    <div className="d-flex justify-content-center pb-5">
                         { this.state.nationality && (
                             <BarGraph title="Nationality of People" 
                             queryResult={this.state.nationality}
                             queryResultNationalityNull={this.state.nationalityNull}
                             />
                         )}
-                    </Row>
-                </Col>
-                    <Row>
+                    </div>
+                    <div className="d-flex justify-content-center pb-4">
                         { (this.state.christianTradition && this.state.religiousFamily) && (
                             this.sanitizeList(this.state.christianTradition, 'christian_tradition'),
                             this.sanitizeList(this.state.religiousFamily, 'religious_family'),
@@ -137,18 +141,15 @@ class GeneralView extends Component {
                                 queryResult2={this.state.christianTradition}
                                 queryResult2NullValues={this.state.christianTraditionNullValues} />
                         )}
-                    </Row>
-                <Col>
-                    <Row className="mt-4">
-                        {
-                            <ExpandList title="Most Activity" queryResult={[this.state.provinces, this.state.prefectures, this.state.counties]} />
-                        }
-                        {
-                            <LineChart></LineChart>
-                        }
-                    </Row>
-                </Col>
-            </>
+                    </div>
+                    <div className="d-flex justify-content-center pb-4">
+                        <ExpandList title="Most Activity" queryResult={[this.state.provinces, this.state.prefectures, this.state.counties]} />
+                    </div>
+                    <div className="d-flex justify-content-center pb-4">
+                        <LineChart />
+                    </div>
+                </div>
+            </div>
         );
     }
 }
