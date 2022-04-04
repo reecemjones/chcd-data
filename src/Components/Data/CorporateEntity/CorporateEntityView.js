@@ -19,6 +19,7 @@ class CorporateEntityView extends Component {
         this.state = {
             language: "en",
             filterDisplay: "filter_container",
+            corporateEntitiesWesternNames: [],
         };
 
         // INITIATE NEO4J INSTANCE
@@ -31,11 +32,11 @@ class CorporateEntityView extends Component {
         this.selectSwitchInitial = query.selectSwitchInitial.bind(this);
         this.filterHide = helper.filterHide.bind(this);
         this.resetFilter = helper.resetFilter.bind(this);
-
+        this.fetchCorporateEntitiesWesternNames = query.fetchCorporateEntitiesWesternNames.bind(this);
     }
     //RUN ON COMPONENT MOUNT //////////////////////////////////////////////////////
     componentDidMount() {
-        
+        this.fetchCorporateEntitiesWesternNames();
     }
 
     //RENDER ///////////////////////////////////////////////////////////////////////
