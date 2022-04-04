@@ -21,7 +21,8 @@ class CorporateEntityView extends Component {
             language: "en",
             filterDisplay: "filter_container",
             nationality: "",
-            nationalityNull: ""
+            nationalityNull: "",
+            corporateEntitiesWesternNames: [],
         };
 
         // INITIATE NEO4J INSTANCE
@@ -43,6 +44,8 @@ class CorporateEntityView extends Component {
     componentDidMount() {
         this.fetchNationality();
         this.fetchNationalityNull();
+        this.fetchCorporateEntitiesWesternNames();
+        this.fetchCorporateEntitiesWesternNames = query.fetchCorporateEntitiesWesternNames.bind(this);
     }
 
     //RENDER ///////////////////////////////////////////////////////////////////////

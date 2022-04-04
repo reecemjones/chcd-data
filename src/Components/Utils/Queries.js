@@ -603,3 +603,13 @@ export function fetchTotalEvents() {
       this.setState ({ christianTraditionNullValues })
       session.close()})
   };
+
+  //QUERY TO GET ALL THE CORPORATE ENTITIES
+  export function fetchCorporateEntitiesWesternNames() {
+    const session = this.driver.session();
+    const query = `MATCH (n:CorporateEntity) RETURN n.name_western as List`
+    session.run(query).then((results) => {
+      const corporateEntitiesWesternNames = results.records.map((record) => record.get('List'));
+      this.setState ({ corporateEntitiesWesternNames })
+      session.close()})
+  };
