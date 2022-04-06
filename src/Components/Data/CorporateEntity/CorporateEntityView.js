@@ -39,13 +39,13 @@ class CorporateEntityView extends Component {
         // QUERIES
         this.fetchNationality = query.fetchNationality.bind(this);
         this.fetchNationalityNull = query.fetchNationalityNull.bind(this);
+        this.fetchCorporateEntitiesWesternNames = query.fetchCorporateEntitiesWesternNames.bind(this);
     }
     //RUN ON COMPONENT MOUNT //////////////////////////////////////////////////////
     componentDidMount() {
         this.fetchNationality();
         this.fetchNationalityNull();
         this.fetchCorporateEntitiesWesternNames();
-        this.fetchCorporateEntitiesWesternNames = query.fetchCorporateEntitiesWesternNames.bind(this);
     }
 
     //RENDER ///////////////////////////////////////////////////////////////////////
