@@ -34,11 +34,10 @@ function FilterData(props) {
            { <Row><Col><Form.Label className="filter_label mb-0">Corporate Entity</Form.Label></Col></Row>}
            <Row><Col>
            {<Form.Select size="sm">
-             {<option>select one</option>}
             {
               Array.from(props.corporateEntitiesWesternNames).map((item) => {    
                 return[
-                  <option>{item}</option>
+                  <option value={item} onChange={this.props.corporateEntity}>{item}</option>
                 ] 
               })}
             </Form.Select>}

@@ -20,9 +20,10 @@ class CorporateEntityView extends Component {
         this.state = {
             language: "en",
             filterDisplay: "filter_container",
-            nationality: "",
+            nationalityCorporateEntity: "",
             nationalityNull: "",
             corporateEntitiesWesternNames: [],
+            CorporateEntity: [],
         };
 
         // INITIATE NEO4J INSTANCE
@@ -37,13 +38,13 @@ class CorporateEntityView extends Component {
         this.resetFilter = helper.resetFilter.bind(this);
 
         // QUERIES
-        this.fetchNationality = query.fetchNationality.bind(this);
+        this.fetchNationalityCorporateEntity = query.fetchNationalityCorporateEntity.bind(this);
         this.fetchNationalityNull = query.fetchNationalityNull.bind(this);
         this.fetchCorporateEntitiesWesternNames = query.fetchCorporateEntitiesWesternNames.bind(this);
     }
     //RUN ON COMPONENT MOUNT //////////////////////////////////////////////////////
     componentDidMount() {
-        this.fetchNationality();
+        this.fetchNationalityCorporateEntity();
         this.fetchNationalityNull();
         this.fetchCorporateEntitiesWesternNames();
     }
@@ -68,10 +69,10 @@ class CorporateEntityView extends Component {
                     <NavigationDataViews active="general" />
                 </div>
                 <div className="d-flex justify-content-center pb-5" style={{ marginTop: 150 }}>
-                    {this.state.nationality && (
+                    {this.state.nationalityCorporateEntity && (
                         <BarGraph
-                            title="Nationality of People"
-                            queryResult={this.state.nationality}
+                            title="Nationality of People Corporate Entity"
+                            queryResult={this.state.nationalityCorporateEntity}
                             queryResultNationalityNull={this.state.nationalityNull}
                         />
                     )}

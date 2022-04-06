@@ -613,3 +613,17 @@ export function fetchTotalEvents() {
       this.setState ({ corporateEntitiesWesternNames })
       session.close()})
   };
+
+    //Query to get Nationality of all people in Corporate Entity
+    export function fetchNationalityCorporateEntity(CorporateEntity) {
+      const session = this.driver.session();
+      const query = `PROFILE MATCH (n:{CorporateEntity}) 
+      WHERE n.name_western = 'CorporateEntitytName'
+      MATCH (n) <-[:PART_OF]-(Person)
+      RETURN DISTINCT {Country: Person.nationality, Number:count(Person.nationality)} as List
+      `
+      session.run(query).then((results) => {
+        const nationalityCorporateEntity = results.records.map((record) => record.get('List', 'nationality'));
+        this.setState ({ nationalityCorporateEntity })
+        session.close()})
+    };
