@@ -12,14 +12,13 @@ import credentials from "../../../credentials.json";
 import * as query from "../../Utils/Queries.js";
 import * as helper from "../../Utils/Helpers.js";
 
-class CorporateEntityView extends Component {
+class GeographicView extends Component {
     //STATE, PROPS, DRIVER INFO, & BINDS
     constructor(props) {
         super(props);
         this.state = {
             language: "en",
             filterDisplay: "filter_container",
-            corporateEntitiesWesternNames: [],
         };
 
         // INITIATE NEO4J INSTANCE
@@ -32,11 +31,11 @@ class CorporateEntityView extends Component {
         this.selectSwitchInitial = query.selectSwitchInitial.bind(this);
         this.filterHide = helper.filterHide.bind(this);
         this.resetFilter = helper.resetFilter.bind(this);
-        this.fetchCorporateEntitiesWesternNames = query.fetchCorporateEntitiesWesternNames.bind(this);
+
     }
     //RUN ON COMPONENT MOUNT //////////////////////////////////////////////////////
     componentDidMount() {
-        this.fetchCorporateEntitiesWesternNames();
+        
     }
 
     //RENDER ///////////////////////////////////////////////////////////////////////
@@ -64,4 +63,4 @@ class CorporateEntityView extends Component {
 
 }
 
-export default CorporateEntityView;
+export default GeographicView;

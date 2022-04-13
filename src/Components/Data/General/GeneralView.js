@@ -102,7 +102,7 @@ class GeneralView extends Component {
         return (
             <div className="bg-light">
                 <Navbar language={this.state.language} langSwitch={this.langSwitch}/>
-                <NavigationDataViews active="general"/>
+                <NavigationDataViews />
                 
                 {/* Data Visualizations */}
                 <div>
