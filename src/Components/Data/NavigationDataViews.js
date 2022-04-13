@@ -17,11 +17,16 @@ function NavigationDataViews(props) {
         <Link to={{pathname:"/institution-view"}}><Button className="me-2" variant="danger">Institution View</Button></Link> :
         <Link to={{pathname:"/institution-view"}}><Button className="me-2" variant="outline-danger">Institution View</Button></Link>;
 
+    let geographicViewLink = window.location.pathname == "/geographic-view" ? 
+        <Link to={{pathname:"/geographic-view"}}><Button className="me-2" variant="danger">Geographic View</Button></Link> :
+        <Link to={{pathname:"/geographic-view"}}><Button className="me-2" variant="outline-danger">Geographic View</Button></Link>;
+
     return (
         <div className="d-flex justify-content-center my-4">
             {generaViewlLink}
             {corporateEntityViewlLink}
             {institutionViewLink}
+            {geographicViewLink}
         </div>
     );
 }

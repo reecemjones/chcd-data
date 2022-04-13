@@ -8,6 +8,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import React, { useState } from 'react'
 import CorporateEntityView from './Components/Data/CorporateEntity/CorporateEntityView';
 import InstitutionView from './Components/Data/Institution/InstitutionView';
+import GeographicView from './Components/Data/Geographic/GeographicView';
 
 
 export default class App extends React.Component {
@@ -24,6 +25,7 @@ render() {
             <Route path="/data" component={GeneralView} />
             <Route path="/corporate-entity" component={CorporateEntityView} />
             <Route path="/institution-view" component={InstitutionView} />
+            <Route path="/geographic-view" component={GeographicView} />
         </main>
       </div>
     );
